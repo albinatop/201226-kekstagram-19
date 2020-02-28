@@ -34,6 +34,29 @@ for (var j = 0; j < userPhotos.length; j++) {
   pictureBlock.append(currentPhoto);
 }
 
+var bigPicture = document.querySelector('.big-picture');
+bigPicture.querySelector('.big-picture__img img').src = userPhotos[0].url;
+bigPicture.querySelector('.social .likes-count').textContent = userPhotos[0].likes;
+bigPicture.querySelector('.social .comments-count').textContent = userPhotos[0].comments.length;
+
+var socialСommentTemplate = document.getElementById('social-comment').content;
+var socialComments = bigPicture.querySelector('.social ul.social__comments');
+socialComments.innerHTML = '';
+
+for (var s = 0; s < userPhotos[0].comments.length; s++) {
+  var currentSocialСomment = socialСommentTemplate.cloneNode(true);
+  currentSocialСomment.querySelector('img').src = userPhotos[0].comments[s].avatar;
+  currentSocialСomment.querySelector('img').alt = userPhotos[0].comments[s].name;
+  currentSocialСomment.querySelector('.social__text').textContent = userPhotos[0].comments[s].message;
+
+  socialComments.append(currentSocialСomment);
+}
+
+bigPicture.classList.remove('hidden');
+
+
+// FUNCTIONS GOES BELOW
+
 // see https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
